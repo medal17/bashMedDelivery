@@ -22,7 +22,7 @@ const data=  [
       },
     ]
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     return (
         <SafeAreaView style={[tw`mx-5`, styles.AndroidSafeArea]}>
             <FlatList
@@ -33,14 +33,14 @@ const HomeScreen = () => {
             contentOffset={3}
             renderItem={
                 ({item}) => (
-                    <TouchableWithoutFeedback  onPress ={() => showItemDetails(item.id)}>
-                        <View style={tw`w-1/2 bg-red-100 my-2  rounded-lg`}>
+                    <TouchableWithoutFeedback  onPress ={() => navigation.navigate('showItemDetails',{item: 'anything you want here'})}>
+                        <View style={tw`w-1/2 bg-red-100 my-2 rounded-lg`}>
                             <Text style={styles.title}>{item.text}</Text>
                             <Image
                                 style={tw`h-24 w-24`}
                                 source={require('../assets/bashMed.png')}
                             />
-                            <Text style={styles.price}>N {item.price} </Text>
+                            <Text style={tw`text-base text-center`}>N {item.price} </Text>
                         </View>
                     </TouchableWithoutFeedback>
                 )
