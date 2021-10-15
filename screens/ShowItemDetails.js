@@ -1,13 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 
 const ShowItemDetails = ({route, navigation}) => {
 const {item } = route.params;
 
     return (
-        <View>
+        <SafeAreaView>
             <Text>{item}</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 
