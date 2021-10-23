@@ -9,6 +9,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/HomeScreen';
+import ShowItemDetails from './screens/ShowItemDetails';
+import DispatchScreen from './screens/DispatchScreen';
+import ShopsScreen from './screens/ShopsScreen';
+import OrdersScreen from './screens/OrdersScreen';
+import RidersScreen from './screens/RidersScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,6 +33,12 @@ export default function App() {
         <Stack.Screen name='login' component={LoginScreen}/>
         <Stack.Screen name='signup' component={SignupScreen}/>
         <Stack.Screen name='homeScreen' component={HomeScreen}/>
+        <Stack.Screen name='showItemDetails' component={ShowItemDetails}/>
+        <Stack.Screen name='dispatchScreen' component={DispatchScreen}/>
+        <Stack.Screen name='storeScreen' component={ShopsScreen}/>
+        <Stack.Screen name='OrdersScreen' component={OrdersScreen}/>
+        <Stack.Screen name='RidersScreen' component={RidersScreen}/>
+        <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

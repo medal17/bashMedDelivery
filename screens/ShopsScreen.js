@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { StyleSheet, Platform, Text, StatusBar, ToastAndroid, View, SafeAreaView, FlatList, TouchableWithoutFeedback, Image, Button, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { StyleSheet, Platform, Text, StatusBar, View, SafeAreaView, FlatList, TouchableWithoutFeedback, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 // import {Icon} from 'react-native-element';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicon from 'react-native-vector-icons/Ionicons';
@@ -18,7 +18,7 @@ const data=  [
       {
         id: '2',
         title: 'Hey',
-        text: 'lorem ipsum dorem lorem ipsum lorem ipsum',
+        text: 'lorem ipsum dorem',
         price: 200,
       },
       {
@@ -50,7 +50,7 @@ const data=  [
     ]
 
 
-const HomeScreen = ({navigation}) => {
+const ShopsScreen = ({navigation}) => {
     const [minimized, setMinimized] =useState(false);
 
     return (
@@ -70,33 +70,29 @@ const HomeScreen = ({navigation}) => {
                 <Ionicon  size={22} name='cart-outline'  style={ [tw`text-indigo-900`, styles.menuIcon]}  />
                 <Text style={tw`ml-2 text-indigo-900 font-semibold`}>Vendors/Stores</Text>
               </View>
-              <TouchableOpacity style={tw`flex-row `} onPress={()=>navigation.navigate('RidersScreen')}>
+              <TouchableOpacity style={tw`flex-row `}>
                 <Ionicon  size={23} name='bicycle'  style={ [tw`text-indigo-900`, styles.menuIcon]}  />
                 <Text style={tw`ml-2 text-indigo-900 font-semibold`}>Dispatchers</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={tw`flex-row ml-1`} onPress={()=>navigation.navigate('OrdersScreen')}>
+              <TouchableOpacity style={tw`flex-row ml-1`}>
                 <Icon name='shopping-basket' size={19} style={ [tw`text-indigo-900`, styles.menuIcon]} />
                 <Text style={tw`ml-2 text-indigo-900 font-semibold`}>My Orders</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={tw`flex-row `} onPress={()=>navigation.navigate('ProfileScreen')}>
+              <TouchableOpacity style={tw`flex-row `}>
                 <Icon name='user' size={20} style={ [tw`text-indigo-900 ml-1`, styles.menuIcon]} />  
                 <Text style={tw`ml-2 text-indigo-900 font-semibold`}>My Profile</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={tw`flex-row ml-1`} 
-                  onPress={()=>Alert.alert('Confirm Log Out', 
-                  'Are you sure you wish to log out', 
-                  [{text:'Yes', onPress:()=>{ToastAndroid.show("Logged Out", ToastAndroid.SHORT); navigation.navigate('login'); }}, 
-                  {text:'No', onPress:()=>{ToastAndroid.show("Cancelled", ToastAndroid.SHORT);}}])}>
+              <TouchableOpacity style={tw`flex-row ml-1`}>
                 <Ionicon  size={22} name='log-out-outline'  style={ [tw`text-indigo-900`, styles.menuIcon]}  />
                 <Text style={tw`ml-2 text-indigo-900 font-semibold`}>Logout</Text>
               </TouchableOpacity>
             </View>
           </View>
 
-          <View style={[tw `${minimized?'ml-40 my-20 shadow-lg bg-gray-100 absolute rounded-3xl pl-5 h-5/6':'w-full mr-6 ml-4 bg-gray-100 drop-shadow-md ml-0 z-50  absolute'}`, styles.AndroidSafeArea]}>
+          <View style={[tw `${minimized?'ml-40 my-20 shadow-lg bg-gray-200 absolute rounded-3xl pl-5 h-5/6':'w-full mr-6 ml-4 bg-gray-100 drop-shadow-md ml-0 z-50  absolute'}`, styles.AndroidSafeArea]}>
             <View style={tw`flex-row justify-between my-5`}>
               <TouchableOpacity onPress={()=>setMinimized(!minimized)}>
                 <View style={tw`bg-white p-2 rounded-md`}>
@@ -105,19 +101,19 @@ const HomeScreen = ({navigation}) => {
               </TouchableOpacity>
               <FeatherIcon size={25} name='shopping-cart' />
             </View>
-            <Text style={tw`text-xl ml-2 font-bold`}>
+            {/* <Text style={tw`text-xl ml-2 font-bold`}>
                What do you want us  
             </Text>
             <Text style={tw`text-base ml-2 mb-4`}>
               to help you deliver?
-            </Text>
+            </Text> */}
             <View style={tw`w-full h-10 bg-white rounded-lg justify-between pl-4 flex-row ml-2 mt-1`}> 
               <TextInput placeholder='Search by Item' />
               <Icon size={20} color="black" name="search" style={tw`flex justify-center mr-3 my-auto`}/>
             </View>
 
             <View style={tw`flex-row justify-between mt-4 ml-2 pb-4`}>
-              <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')}>
+              <TouchableOpacity onPress={()=>navigation.navigate('homeScreen')}>
                 <View style={tw`${minimized? 'bg-purple-900 py-1.5 px-5 rounded-lg mr-4':'bg-purple-900 py-1.5 px-5 rounded-lg'} `}>
                   <Text style={tw`text-white font-semibold text-sm`}>
                     Eatery
@@ -131,7 +127,7 @@ const HomeScreen = ({navigation}) => {
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=>navigation.navigate('storeScreen')}>
+              <TouchableOpacity>
                 <View style={tw`bg-purple-900 py-1.5 px-5 rounded-lg `}>
                   <Text style={tw`text-white font-semibold text-sm`}>
                     Stores
@@ -150,23 +146,23 @@ const HomeScreen = ({navigation}) => {
             renderItem={
                 ({item}) => (
                     <TouchableWithoutFeedback  onPress ={() => navigation.navigate('showItemDetails',{item: item.text})}>
-                        <View style={tw`w-1/2 mx-1 my-2 flex-row  rounded-lg h-52`}>
-                          <View style={tw`w-11/12 bg-gray-200 mx-1 my-2 rounded-2xl h-full mb-3 p-2 flex justify-around `}>
+                        <View style={tw`w-1/2 mx-1 my-2 flex-row  rounded-lg h-44`}>
+                          <View style={tw`w-10/12 bg-gray-100 mx-1 my-2 rounded-2xl h-full mb-3 p-2 flex justify-around `}>
                             <Image
-                                style={tw`h-24 w-24 flex justify-center rounded-full mx-auto`}
+                                style={tw`h-20 w-20 flex justify-center rounded-full mx-auto`}
                                 source={require('../assets/bashMed.png')}
                             />
                             <Text style={[tw`mx-auto text-center`,styles.title]}>{item.text}</Text>
                             <View style={tw`flex-row mx-1 justify-around`}>
-                              <Text style={tw`text-base text-center `}>N {item.price} </Text>
+                              {/* <Text style={tw`text-base text-center `}>N {item.price} </Text> */}
                               {/* <Button title='Add to Cart' style={tw`w-1/2`} /> */}
-                              <TouchableOpacity>
+                              {/* <TouchableOpacity>
                                 <View style={tw`bg-purple-900 py-1 px-5 rounded-md `}>
                                   <Text style={tw`text-white font-semibold text-sm`}>
                                     Buy
                                   </Text>
                                 </View>
-                              </TouchableOpacity>
+                              </TouchableOpacity> */}
                             </View>
                           </View>
                         </View>
@@ -179,7 +175,7 @@ const HomeScreen = ({navigation}) => {
     )
 }
 
-export default HomeScreen
+export default ShopsScreen
 
 // const styles = StyleSheet.create({})
 const styles = StyleSheet.create({
