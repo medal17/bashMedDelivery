@@ -37,85 +37,60 @@ const DispatchScreen = ({navigation}) => {
             /> */}
           
             
-            <View style={tw`h-33 absolute z-50 w-full px-5`}>
+            <View style={tw`h-32 z-50 w-full px-5`}>
                 <View >
                     <Ionicon name='chevron-back' size={20} />
                     <Text>Map Screen</Text>
                 </View>
                 <GooglePlacesAutocomplete
-                placeholder='Enter Your Location'
-                ref={ref}
-                minLength={2}
-                autoFocus={false}
-                returnKeyType={'search'}
-                renderDescription={row => row.description}
-                fetchDetails={true}
-                onPress={(data, details = null) => {
-                    // 'details' is provided when fetchDetails = true
-                    console.log(data, details);
-                    setData(details)
+                    nearbyPlacesAPI="GooglePlacesSearch"
+                    debounce={400}
+                    placeholder='Enter Your Location'
+                    onPress={(data, details = null) => {
+                        // 'details' is provided when fetchDetails = true
+                        console.log(data, details);
+                        setData(details)
+                    }}
+                    // currentLocation={true}
+                    // currentLocationLabel='Current location'
+                    query={{
+                        key: 'AIzaSyBWguSH-uQILMtBnQ2OUGdZN_sTd7SiIv4',
+                        language: 'en',
+                    }}
+                    style={{
+                    container:{
+                        flex:0,
+                    },
+                    textInput: {
+                        fontSize:18,
+                        backgroundColor: '#F9F5F4',
+                        borderRadius: 50,
+                        width: "100%",
+                        height: 150,
+                        padding: 20,
+                    },
+                    description: {
+                        // color: '#ac879a',
+                        fontWeight: '300'
+                    },
+                    predefinedPlacesDescription: {
+                        color: '#1faadb'
+                    }
                 }}
-                // currentLocation={true}
-                // currentLocationLabel='Current location'
-                query={{
-                    key: 'AIzaSyBWguSH-uQILMtBnQ2OUGdZN_sTd7SiIv4',
-                    language: 'en',
-                }}
-                style={{
-                listView: {
-                    position: 'absolute',
-                    top: 60,
-                    left: 10,
-                    right: 10,
-                    backgroundColor: 'white',
-                    borderRadius: 5,
-                    flex: 1,
-                    elevation: 3,
-                    zIndex: 100,
-                },
-                textInputContainer: {
-                    backgroundColor: 'transparent',
-                    margin: 0,
-                    width: '100%',
-                    padding: 0,
-                    borderTopWidth: 0,
-                    borderBottomWidth: 0
-                },
-                textInput: {
-                    backgroundColor: '#F9F5F4',
-                    borderRadius: 50,
-                    width: "100%",
-                    height: 150,
-                    padding: 20,
-                },
-                description: {
-                    // color: '#ac879a',
-                    fontWeight: '300'
-                },
-                predefinedPlacesDescription: {
-                    color: '#1faadb'
-                }
-            }}
-                />
+            />
                 <GooglePlacesAutocomplete
                 placeholder='Enter Destination Location'
-                ref={ref}
-                minLength={2}
-                autoFocus={false}
-                returnKeyType={'default'}
-                fetchDetails={true}
-                onPress={(data, details = null) => {
-                    // 'details' is provided when fetchDetails = true
-                    console.log(data, details);
-                    setData(details)
-                }}
                 // currentLocation={true}
                 // currentLocationLabel='Current location'
                 query={{
-                    key: 'AIzaSyBWguSH-uQILMtBnQ2OUGdZN_sTd7SiIv4',
+                    key: 'AIzaSyAx2AARYJ8_Hy6mXAeSjDKYa4jiUWPC7qQ',
                     language: 'en',
                 }}
                 style={{
+                    container:{
+                        flex: 0,
+                        marginTop:2,
+                    },
                     textInputContainer: {
                     backgroundColor: 'grey',
                     },

@@ -1,4 +1,4 @@
-import 'react-native-safe-area-context';
+ import 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
@@ -15,6 +15,8 @@ import ShopsScreen from './screens/ShopsScreen';
 import OrdersScreen from './screens/OrdersScreen';
 import RidersScreen from './screens/RidersScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 
 const Stack = createNativeStackNavigator();
@@ -27,20 +29,22 @@ const Stack = createNativeStackNavigator();
 // const navigation = useNavigation();
 export default function App() {
   return (
-    <NavigationContainer >
-      <Stack.Navigator screenOptions={{headerShown:false}} >
-        <Stack.Screen name='splashScreen' component={SplashScreen}/>
-        <Stack.Screen name='login' component={LoginScreen}/>
-        <Stack.Screen name='signup' component={SignupScreen}/>
-        <Stack.Screen name='homeScreen' component={HomeScreen}/>
-        <Stack.Screen name='showItemDetails' component={ShowItemDetails}/>
-        <Stack.Screen name='dispatchScreen' component={DispatchScreen}/>
-        <Stack.Screen name='storeScreen' component={ShopsScreen}/>
-        <Stack.Screen name='OrdersScreen' component={OrdersScreen}/>
-        <Stack.Screen name='RidersScreen' component={RidersScreen}/>
-        <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer >
+        <Stack.Navigator screenOptions={{headerShown:false}} >
+          <Stack.Screen name='splashScreen' component={SplashScreen}/>
+          <Stack.Screen name='login' component={LoginScreen}/>
+          <Stack.Screen name='signup' component={SignupScreen}/>
+          <Stack.Screen name='homeScreen' component={HomeScreen}/>
+          <Stack.Screen name='showItemDetails' component={ShowItemDetails}/>
+          <Stack.Screen name='dispatchScreen' component={DispatchScreen}/>
+          <Stack.Screen name='storeScreen' component={ShopsScreen}/>
+          <Stack.Screen name='OrdersScreen' component={OrdersScreen}/>
+          <Stack.Screen name='RidersScreen' component={RidersScreen}/>
+          <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
