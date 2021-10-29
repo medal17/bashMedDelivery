@@ -20,13 +20,7 @@ import { store } from './store';
 
 
 const Stack = createNativeStackNavigator();
-// const globalScreenOptions={
-//   headerStyle:{backgroundColor:'red'},
-//   headerTitleStyle:{color:'red'},
-//   headerTintColor:'red',
-//   header
-// }
-// const navigation = useNavigation();
+
 export default function App() {
   return (
     <Provider store={store}>
@@ -42,6 +36,8 @@ export default function App() {
           <Stack.Screen name='OrdersScreen' component={OrdersScreen}/>
           <Stack.Screen name='RidersScreen' component={RidersScreen}/>
           <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>
+         
+
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

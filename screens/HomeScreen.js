@@ -1,12 +1,27 @@
 import React, {useState} from 'react'
-import { StyleSheet, Platform, Text, StatusBar, ToastAndroid, View, SafeAreaView, FlatList, TouchableWithoutFeedback, Image, Button, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { StyleSheet, Platform, Text, StatusBar, AsyncStorageStatic, ToastAndroid, View, SafeAreaView, FlatList, TouchableWithoutFeedback, Image, Button, TouchableOpacity, TextInput, Alert } from 'react-native';
 // import {Icon} from 'react-native-element';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import tw from 'tailwind-react-native-classnames';
+import {selectUser} from '../slices/navSlice'
+import { useSelector } from 'react-redux';
+import { Logout } from '../firebase/actions';
+import { useDispatch } from 'react-redux';
 
+const _retrieveData = async () => {
+  try {
+    const value = await AsyncStorageStatic.getItem('details');
+    if (value !== null) {
+      // We have data!!
+      console.log(value);
+    }
+  } catch (error) {
+    // Error retrieving data
+  }
+};
 
 const data=  [
       {
@@ -52,7 +67,9 @@ const data=  [
 
 const HomeScreen = ({navigation}) => {
     const [minimized, setMinimized] =useState(false);
-
+    const user = useSelector(selectUser);
+    const dispatch = useDispatch();
+    // console.log(user.user.email)
     return (
         <SafeAreaView style={[tw`mr-6 ml-4 `, styles.AndroidSafeArea]}>
           <View style={[tw`h-full `]}>
@@ -61,7 +78,7 @@ const HomeScreen = ({navigation}) => {
                   <Icon size={32} name='user-alt'  style={ [tw`text-indigo-900 justify-center m-auto`]} />
                 </View>
                 <View style={ tw`text-indigo-900  mt-2`}>
-                  <Text style={ [tw`text-indigo-900 justify-center mx-auto`]}>Please Login</Text>
+                  <Text style={ [tw`text-indigo-900 justify-center mx-auto`]}>{ user ? user.user.email:'Please Login'}</Text>
                 </View>
             </View>
 
@@ -88,7 +105,7 @@ const HomeScreen = ({navigation}) => {
               <TouchableOpacity style={tw`flex-row ml-1`} 
                   onPress={()=>Alert.alert('Confirm Log Out', 
                   'Are you sure you wish to log out', 
-                  [{text:'Yes', onPress:()=>{ToastAndroid.show("Logged Out", ToastAndroid.SHORT); navigation.navigate('login'); }}, 
+                  [{text:'Yes', onPress:()=>{ToastAndroid.show("Logged Out", ToastAndroid.SHORT); Logout(navigation, dispatch) }}, 
                   {text:'No', onPress:()=>{ToastAndroid.show("Cancelled", ToastAndroid.SHORT);}}])}>
                 <Ionicon  size={22} name='log-out-outline'  style={ [tw`text-indigo-900`, styles.menuIcon]}  />
                 <Text style={tw`ml-2 text-indigo-900 font-semibold`}>Logout</Text>
@@ -160,7 +177,7 @@ const HomeScreen = ({navigation}) => {
                             <View style={tw`flex-row mx-1 justify-around`}>
                               <Text style={tw`text-base text-center `}>N {item.price} </Text>
                               {/* <Button title='Add to Cart' style={tw`w-1/2`} /> */}
-                              <TouchableOpacity>
+                              <TouchableOpacity >
                                 <View style={tw`bg-purple-900 py-1 px-5 rounded-md `}>
                                   <Text style={tw`text-white font-semibold text-sm`}>
                                     Buy
@@ -178,6 +195,7 @@ const HomeScreen = ({navigation}) => {
         </SafeAreaView>
     )
 }
+
 
 export default HomeScreen
 
